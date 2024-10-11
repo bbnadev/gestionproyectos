@@ -1,11 +1,9 @@
-# Modelo Proyecto
 class Proyecto:
-    def __init__(self, id=None, nombre="", descripcion="", fecha_inicio=None, empleados=[]):
+    def __init__(self, id=None, nombre="", descripcion="", fecha_inicio=None):
         self._id = id
         self._nombre = nombre
         self._descripcion = descripcion
         self._fecha_inicio = fecha_inicio
-        self._empleados = empleados
 
     # Getters
     def get_id(self):
@@ -20,9 +18,6 @@ class Proyecto:
     def get_fecha_inicio(self):
         return self._fecha_inicio
 
-    def get_fecha_inicio(self):
-        return self._empleados
-
     # Setters
 
     def set_id(self, id):
@@ -36,9 +31,3 @@ class Proyecto:
 
     def set_fecha_inicio(self, fecha_inicio):
         self._fecha_inicio = fecha_inicio
-
-    def add_empleados(self, empleado):
-        self._empleados.append(empleado)
-
-    def remove_empleados(self, empleado):
-        self._empleados.remove(empleado)
