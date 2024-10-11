@@ -1,7 +1,9 @@
 # controllers/empleado_controller.py
 import mysql.connector
 from models.empleado import Empleado
-from config.database import db_config  # Importa la configuración de la base de datos
+# Importa la configuración de la base de datos
+from config.database import db_config
+
 
 class EmpleadoController:
     def __init__(self):
@@ -10,7 +12,7 @@ class EmpleadoController:
     def conectar(self):
         return mysql.connector.connect(**self.db_config)
 
-    def crear_empleado(self, empleado):
+    def crear(self, empleado: Empleado):
         connection = self.conectar()
         cursor = connection.cursor()
         query = ("INSERT INTO Empleado (rut, nombre, direccion, telefono, email, fecha_inicio, salario, departamento_id) "
@@ -24,7 +26,7 @@ class EmpleadoController:
 
     # Los demás métodos CRUD seguirían aquí...
 
-    def listar_empleados(self):
+    def listar(self):
         connection = self.conectar()
         cursor = connection.cursor()
         query = "SELECT * FROM Empleado"
@@ -34,7 +36,7 @@ class EmpleadoController:
         connection.close()
         return empleados
 
-    def buscar_empleado_por_rut(self, rut):
+    def buscar_por_rut(self, rut):
         connection = self.conectar()
         cursor = connection.cursor()
         query = "SELECT * FROM Empleado WHERE rut = %s"
@@ -44,7 +46,7 @@ class EmpleadoController:
         connection.close()
         return empleado
 
-    def modificar_empleado(self, empleado):
+    def modificar(self, empleado: Empleado):
         connection = self.conectar()
         cursor = connection.cursor()
         query = ("UPDATE Empleado SET nombre = %s, direccion = %s, telefono = %s, email = %s, "
@@ -56,7 +58,7 @@ class EmpleadoController:
         cursor.close()
         connection.close()
 
-    def eliminar_empleado(self, rut):
+    def eliminar(self, rut):
         connection = self.conectar()
         cursor = connection.cursor()
         query = "DELETE FROM Empleado WHERE rut = %s"

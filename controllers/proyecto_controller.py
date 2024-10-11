@@ -91,7 +91,7 @@ class ProyectoController:
         connection = self.conectar()
         cursor = connection.cursor()
         cursor.execute(
-            f"SELECT * FROM ProyectoXEmpleado WHERE id_proyecto = {id_proyecto}")
+            f"SELECT e.id id, e.rut rut, e.nombre nombre, e.direccion direccion, e.telefono telefono, e.email email, e.fecha_inicio fecha_inicio, e.salario salario, e.departamento_id departamento_id FROM ProyectoXEmpleado PxE JOIN Proyecto p ON PxE.id_proyecto = p.id JOIN Empleado e ON PxE.id_empleado = e.id WHERE id_proyecto = {id_proyecto}")
         empleados = cursor.fetchall()
         cursor.close()
         connection.close()
