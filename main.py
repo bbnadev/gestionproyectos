@@ -1,5 +1,7 @@
 # main.py
-from views.menu import menu_principal, menu_empleado, menu_departamento
+from views.menu import menu_principal, menu_empleado, menu_departamento, menu_proyecto
+from views.proyecto_view import ProyectoView
+
 from controllers.empleado_controller import EmpleadoController
 from controllers.departamento_controller import DepartamentoController
 from models.empleado import Empleado
@@ -170,6 +172,31 @@ def main():
                     break
 
         elif opcion == "3":
+            proyecto_view = ProyectoView()
+            while True:
+                menu_proyecto()
+                sub_opcion = input("Seleccione una opción: ")
+                if sub_opcion == "3.1":
+                    proyecto_view.crear()
+                elif sub_opcion == "3.2":
+                    proyecto_view.listar()
+                elif sub_opcion == "3.3":
+                    proyecto_view.buscar_por_id()
+                elif sub_opcion == "3.4":
+                    proyecto_view.buscar_por_nombre()
+                elif sub_opcion == "3.5":
+                    proyecto_view.modificar()
+                elif sub_opcion == "3.6":
+                    proyecto_view.eliminar()
+                elif sub_opcion == "3.7":
+                    proyecto_view.agregar_empleado()
+                elif sub_opcion == "3.8":
+                    proyecto_view.quitar_empleado()
+                elif sub_opcion == "3.9":
+                    proyecto_view.listar_empleados()
+                elif sub_opcion == "3.10":
+                    break
+        elif opcion == "4":
             print("Saliendo del sistema...")
             break
 
