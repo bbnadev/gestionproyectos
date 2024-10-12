@@ -90,18 +90,31 @@ UNLOCK TABLES;
 
 CREATE TABLE IF NOT EXISTS Proyecto(
 	id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50),
-    descripcion VARCHAR(255),
-    fecha_inicio DATE
+  nombre VARCHAR(50),
+  descripcion VARCHAR(255),
+  fecha_inicio DATE
 );
 
 INSERT INTO Proyecto VALUES (1,'Proyecto 1','Descripcion 1','2023-09-25'),(2,'Proyecto 2','Descripcion 2','2024-09-25');
 
 CREATE TABLE IF NOT EXISTS ProyectoXEmpleado(
-    id_proyecto INT NOT NULL,
-    id_empleado INT NOT NULL,
-    FOREIGN KEY (id_proyecto) REFERENCES Proyecto(id),
-    FOREIGN KEY (id_empleado) REFERENCES Empleado(id)
+  id_proyecto INT NOT NULL,
+  id_empleado INT NOT NULL,
+  FOREIGN KEY (id_proyecto) REFERENCES Proyecto(id),
+  FOREIGN KEY (id_empleado) REFERENCES Empleado(id)
 );
 
 INSERT INTO ProyectoXEmpleado VALUES (1,2),(2,3);
+
+CREATE TABLE IF NOT EXISTS RegistroTiempo (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+  fecha DATE NOT NULL,
+  horas_trabajadas FLOAT NOT NULL,
+  descripcion VARCHAR(255),
+  id_empleado INT NOT NULL,
+  id_proyecto INT NOT NULL,
+  FOREIGN KEY (id_empleado) REFERENCES Empleado(id),
+  FOREIGN KEY (id_proyecto) REFERENCES Proyecto(id)
+);
+
+INSERT INTO RegistroTiempo VALUES (1,'2024-09-25',8,'Descripcion 1',2,1);
