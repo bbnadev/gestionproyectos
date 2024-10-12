@@ -11,7 +11,7 @@ class RegistroTiempoView:
     def crear(self):
         proyectoController = ProyectoController()
         empleadoController = EmpleadoController()
-    # fecha, horas_trabajadas, descripcion, id_empleado, id_proyecto
+
         rut_empleado = input("Ingrese el RUT del empleado: ")
         empleado = empleadoController.buscar_por_rut(rut_empleado)
 
@@ -40,3 +40,17 @@ class RegistroTiempoView:
 
         id = self.controller.crear(nuevo_registro)
         print("Registro de tiempo creado con éxito con el ID:", id)
+
+    def listar(self):
+        registros = self.controller.listar()
+        for registro in registros:
+            print(registro)
+
+    def buscar_por_id(self):
+        id = int(input("Ingrese el ID del registro de tiempo a buscar: "))
+        registro = self.controller.buscar_por_id(id)
+        if not registro:
+            print("Registro de tiempo no encontrado.")
+            return
+
+        print(registro)

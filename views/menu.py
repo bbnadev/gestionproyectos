@@ -42,4 +42,6 @@ def menu_proyecto():
 
 def menu_registro_tiempo():
     print("4.1 Crear Registro de Tiempo")
-    print("4.2 Volver al menu Principal")
+    print("4.2 Listar Registros de Tiempo")
+    print("4.3 Buscar Registro de Tiempo por id")
+    print("4.4 Volver al menu Principal")
