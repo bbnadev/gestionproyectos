@@ -1,8 +1,9 @@
 # main.py
-from views.menu import menu_principal, menu_empleado, menu_departamento, menu_proyecto
+from views.menu import menu_principal, menu_empleado, menu_departamento, menu_proyecto, menu_registro_tiempo
 from views.proyecto_view import ProyectoView
 from views.empleado_view import EmpleadoView
 from views.departamento_view import DepartamentoView
+from views.registro_tiempo_view import RegistroTiempoView
 
 
 def main():
@@ -73,6 +74,15 @@ def main():
                 elif sub_opcion == "3.10":
                     break
         elif opcion == "4":
+            registro_tiempo_view = RegistroTiempoView()
+            while True:
+                menu_registro_tiempo()
+                sub_opcion = input("Seleccione una opción: ")
+                if sub_opcion == "4.1":
+                    registro_tiempo_view.crear()
+                elif sub_opcion == "4.2":
+                    break
+        elif opcion == "5":
             print("Saliendo del sistema...")
             break
 

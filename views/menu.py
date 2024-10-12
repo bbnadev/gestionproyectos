@@ -5,7 +5,8 @@ def menu_principal():
     print("1. Registro de Empleados")
     print("2. Gestión de Departamentos")
     print("3. Gestion de Proyectos")
-    print("4. Salir")
+    print("4. Gestion de Registro de Tiempo")
+    print("5. Salir")
 
 
 def menu_empleado():
@@ -37,3 +38,8 @@ def menu_proyecto():
     print("3.8 Remover Empleado de Proyecto")
     print("3.9 Listar empleados de un Proyecto")
     print("3.10 Volver al menu Principal")
+
+
+def menu_registro_tiempo():
+    print("4.1 Crear Registro de Tiempo")
+    print("4.2 Volver al menu Principal")
