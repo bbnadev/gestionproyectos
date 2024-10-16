@@ -7,10 +7,6 @@ class RegistroTiempo:
         self._id_empleado = id_empleado
         self._id_proyecto = id_proyecto
 
-    # Registro de Tiempo:
-    # El sistema debe permitir a los empleados registrar las horas trabajadas. Los empleados deben poder ingresar la fecha,
-    # la cantidad de horas trabajadas y una breve descripción de las tareas realizadas. Estos registros de tiempo deben estar asociados a un empleado y a un proyecto específico.
-
     def get_id(self):
         return self._id
 
