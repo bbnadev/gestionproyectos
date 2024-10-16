@@ -84,7 +84,7 @@ def main():
                     registro_tiempo_view.listar()
                 elif sub_opcion == "4.3":
                     registro_tiempo_view.buscar_por_id()
-                elif sub_opcion == "4.4":
+                elif sub_opcion == "4.6":
                     break
         elif opcion == "5":
             print("Saliendo del sistema...")
