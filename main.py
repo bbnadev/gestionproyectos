@@ -24,10 +24,12 @@ def main():
                 elif sub_opcion == "1.3":
                     empleado_view.buscar_por_rut()
                 elif sub_opcion == "1.4":
-                    empleado_view.modificar()
+                    empleado_view.buscar_por_id()
                 elif sub_opcion == "1.5":
-                    empleado_view.eliminar()
+                    empleado_view.modificar()
                 elif sub_opcion == "1.6":
+                    empleado_view.eliminar()
+                elif sub_opcion == "1.7":
                     break
 
         elif opcion == "2":
@@ -84,9 +86,15 @@ def main():
                     registro_tiempo_view.listar()
                 elif sub_opcion == "4.3":
                     registro_tiempo_view.buscar_por_id()
+                elif sub_opcion == "4.4":
+                    registro_tiempo_view.modificar()
+                elif sub_opcion == "4.5":
+                    registro_tiempo_view.buscar_por_id()
                 elif sub_opcion == "4.6":
                     break
         elif opcion == "5":
+            print("WIP")
+        elif opcion == "6":
             print("Saliendo del sistema...")
             break
 

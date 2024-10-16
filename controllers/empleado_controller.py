@@ -45,6 +45,16 @@ class EmpleadoController:
         cursor.close()
         connection.close()
         return empleado
+    
+    def buscar_por_id(self, id):
+        connection = self.conectar()
+        cursor = connection.cursor()
+        query = "SELECT * FROM Empleado WHERE id = %s"
+        cursor.execute(query, (id,))
+        empleado = cursor.fetchone()
+        cursor.close()
+        connection.close()
+        return empleado
 
     def modificar(self, empleado: Empleado):
         connection = self.conectar()

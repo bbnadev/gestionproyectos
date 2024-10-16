@@ -8,6 +8,11 @@ class EmpleadoView:
 
     def crear(self):
         rut = input("Ingrese el RUT del empleado: ")
+
+        if self.controller.buscar_por_rut(rut):
+            print("Ya existe un empleado con ese RUT.")
+            return
+
         nombre = input("Ingrese el nombre del empleado: ")
         direccion = input("Ingrese la dirección del empleado: ")
         telefono = input("Ingrese el teléfono del empleado: ")
@@ -38,6 +43,14 @@ class EmpleadoView:
     def buscar_por_rut(self):
         rut = input("Ingrese el RUT del empleado a buscar: ")
         empleado = self.controller.buscar_por_rut(rut)
+        if not empleado:
+            print("Empleado no encontrado.")
+            return
+        print(empleado)
+
+    def buscar_por_id(self):
+        id_empleado = input("Ingrese el ID del empleado a buscar: ")
+        empleado = self.controller.buscar_por_id(id_empleado)
         if not empleado:
             print("Empleado no encontrado.")
             return

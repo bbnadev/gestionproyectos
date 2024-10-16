@@ -32,7 +32,7 @@ class RegistroTiempo:
         self._fecha = fecha
 
     def set_horas_trabajadas(self, horas_trabajadas):
-        self._horas_trabajadas
+        self._horas_trabajadas = horas_trabajadas
 
     def set_descripcion(self, descripcion):
         self._descripcion = descripcion

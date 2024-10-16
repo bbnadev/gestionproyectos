@@ -6,16 +6,18 @@ def menu_principal():
     print("2. Gestión de Departamentos")
     print("3. Gestion de Proyectos")
     print("4. Gestion de Registro de Tiempo")
-    print("5. Salir")
+    print("5. Exportar (WIP)")
+    print("6. Salir")
 
 
 def menu_empleado():
     print("1.1 Crear Empleado")
     print("1.2 Listar Empleado")
-    print("1.3 Buscar Empleado")
-    print("1.4 Modificar Empleado")
-    print("1.5 Eliminar Empleado")
-    print("1.6 Volver al menu Principal")
+    print("1.3 Buscar Empleado por RUT")
+    print("1.4 Buscar Empleado por ID")
+    print("1.5 Modificar Empleado")
+    print("1.6 Eliminar Empleado")
+    print("1.7 Volver al menu Principal")
 
 
 def menu_departamento():
