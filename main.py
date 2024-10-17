@@ -1,9 +1,10 @@
 # main.py
-from views.menu import menu_principal, menu_empleado, menu_departamento, menu_proyecto, menu_registro_tiempo
+from views.menu import menu_principal, menu_empleado, menu_departamento, menu_proyecto, menu_registro_tiempo, menu_exportar
 from views.proyecto_view import ProyectoView
 from views.empleado_view import EmpleadoView
 from views.departamento_view import DepartamentoView
 from views.registro_tiempo_view import RegistroTiempoView
+from views.exportar_view import ExportarView
 
 
 def main():
@@ -93,7 +94,16 @@ def main():
                 elif sub_opcion == "4.6":
                     break
         elif opcion == "5":
-            print("WIP")
+            exportar_view = ExportarView()
+            while True:
+                menu_exportar()
+                sub_opcion = input("Seleccione una opción: ")
+                if sub_opcion == "5.1":
+                    exportar_view.exportar_excel()
+                if sub_opcion == "5.2":
+                    print("WIP")
+                if sub_opcion == "5.3":
+                    break
         elif opcion == "6":
             print("Saliendo del sistema...")
             break

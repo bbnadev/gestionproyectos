@@ -49,3 +49,9 @@ def menu_registro_tiempo():
     print("4.4 Modificar Registro de Tiempo")
     print("4.5 Eliminar Registro de Tiempo")
     print("4.6 Volver al menu Principal")
+
+
+def menu_exportar():
+    print("5.1 Exportar Excel")
+    print("5.2 Exportar PDF")
+    print("5.3 Volver al menu principal")
