@@ -1,7 +1,7 @@
 import pandas as pd
 from sqlalchemy import create_engine
 from config.database import db_config
-
+from datetime import date
 
 class ExportarView:
     def __init__(self):
@@ -10,14 +10,14 @@ class ExportarView:
     def exportar_excel(self):
         query = """
 SELECT 
-    e.id AS empleado_id,
-    e.nombre AS empleado_nombre,
-    e.rut AS empleado_rut,
-    d.nombre AS departamento_nombre,
-    p.nombre AS proyecto_nombre,
-    rt.fecha AS fecha_registro,
-    rt.horas_trabajadas,
-    rt.descripcion AS descripcion_registro
+    e.id AS ID,
+    e.nombre AS NOMBRE,
+    e.rut AS RUT,
+    d.nombre AS DEPARTAMENTO,
+    p.nombre AS PROYECTO,
+    rt.fecha AS "FECHA REGISTRO",
+    rt.horas_trabajadas AS "HORAS TRABAJADAS",
+    rt.descripcion AS "DESCRIPCIÓN"
 FROM 
     empleado e
 LEFT JOIN 
@@ -34,5 +34,5 @@ LEFT JOIN
 
         df_informe = pd.read_sql(
             query, con=db_connection)
-        df_informe.to_excel('informes/informe_empleados.xlsx', index=False)
+        df_informe.to_excel(f'informes/informe_empleados_{date.today()}.xlsx', index=False)
         print("Informe de Excel generado exitosamente.")
