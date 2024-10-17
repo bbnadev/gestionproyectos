@@ -1,5 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine
+from config.database import db_config
 
 
 class ExportarView:
@@ -27,7 +28,8 @@ LEFT JOIN
     Proyecto p ON rt.id_proyecto = p.id
 """
 
-        db_connection_str = 'mysql+mysqlconnector://root:Inacap.2024@localhost/gestionproyectos'
+        db_connection_str = f'mysql+mysqlconnector://{db_config['user']}:{
+            db_config['password']}@{db_config['host']}/{db_config["database"]}'
         db_connection = create_engine(db_connection_str)
 
         df_informe = pd.read_sql(
