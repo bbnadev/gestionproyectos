@@ -42,9 +42,9 @@ LEFT JOIN
 
         conn = self.create_connection()
 
-        df_informe = pd.read_sql(
+        df = pd.read_sql(
             self.query(), con=conn)
-        df_informe.to_excel('informes/informe_empleados.xlsx', index=False)
+        df.to_excel('informes/informe_empleados.xlsx', index=False)
         print("Informe de Excel generado exitosamente.")
 
     def exportar_pdf(self):
