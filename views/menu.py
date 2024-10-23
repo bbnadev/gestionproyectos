@@ -6,7 +6,7 @@ def menu_principal():
     print("2. Gestión de Departamentos")
     print("3. Gestion de Proyectos")
     print("4. Gestion de Registro de Tiempo")
-    print("5. Exportar (WIP)")
+    print("5. Exportar")
     print("6. Salir")
 
 
