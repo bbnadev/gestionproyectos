@@ -101,7 +101,7 @@ def main():
                 if sub_opcion == "5.1":
                     exportar_view.exportar_excel()
                 if sub_opcion == "5.2":
-                    print("WIP")
+                    exportar_view.exportar_pdf()
                 if sub_opcion == "5.3":
                     break
         elif opcion == "6":
