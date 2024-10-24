@@ -27,9 +27,7 @@ class DepartamentoView:
             print("Departamento no encontrado")
             return
 
-        dept = Departamento(*dept)
-        print(f"ID: {dept.get_id()}\nNombre: {
-              dept.get_nombre()}\nID Gerente: {dept.get_gerente_id()}")
+        print(dept)
 
     def modificar(self):
         id_departamento = input("Ingrese el id del departamento a modificar: ")
