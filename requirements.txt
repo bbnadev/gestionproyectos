@@ -1,5 +1,5 @@
-mysql-connector-python
-pandas
-openpyxl
-sqlalchemy
-matplotlib
+mysql-connector-python==9.1.0
+pandas==2.2.3
+openpyxl==3.1.5
+sqlalchemy==2.0.36
+matplotlib==3.9.2
