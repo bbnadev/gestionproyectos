@@ -22,8 +22,7 @@ class ProyectoView:
     def listar(self):
         proyectos = self.controller.listar()
         for proyecto in proyectos:
-            print(f"ID: {proyecto[0]}, Nombre: {proyecto[1]}, Descripción: {
-                  proyecto[2]}, Fecha de inicio: {proyecto[3]}")
+            print(proyecto)
 
     def buscar_por_id(self):
         id_proyecto = int(input("Ingrese el ID del proyecto a buscar: "))
@@ -31,10 +30,7 @@ class ProyectoView:
         if not proyecto:
             print("Proyecto no encontrado.")
             return
-
-        proyecto = Proyecto(*proyecto)
-        print(f"ID: {proyecto.get_id()}\nNombre: {proyecto.get_nombre()}\nDescripción: {
-            proyecto.get_descripcion()}\nFecha de inicio: {proyecto.get_fecha_inicio()}")
+        print(proyecto)
 
     def buscar_por_nombre(self):
         nombre = input("Ingrese el nombre del proyecto a buscar: ")
@@ -42,10 +38,7 @@ class ProyectoView:
         if not proyecto:
             print("Proyecto no encontrado.")
             return
-
-        proyecto = Proyecto(*proyecto)
-        print(f"ID: {proyecto.get_id()}\nNombre: {proyecto.get_nombre()}\nDescripción: {
-            proyecto.get_descripcion()}\nFecha de inicio: {proyecto.get_fecha_inicio()}")
+        print(proyecto)
 
     def modificar(self):
         id_proyecto = int(input("Ingrese el ID del proyecto a modificar: "))
