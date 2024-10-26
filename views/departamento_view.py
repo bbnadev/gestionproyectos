@@ -1,5 +1,4 @@
-from controllers.departamento_controller import DepartamentoController
-from models.departamento import Departamento
+from controllers.departamento_controller import DepartamentoController, Departamento
 
 
 class DepartamentoView:
