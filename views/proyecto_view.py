@@ -1,5 +1,4 @@
-from controllers.proyecto_controller import ProyectoController
-from models.proyecto import Proyecto
+from controllers.proyecto_controller import ProyectoController, Proyecto
 
 
 class ProyectoView:
