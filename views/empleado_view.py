@@ -1,5 +1,4 @@
-from controllers.empleado_controller import EmpleadoController
-from models.empleado import Empleado
+from controllers.empleado_controller import EmpleadoController, Empleado
 
 
 class EmpleadoView:
