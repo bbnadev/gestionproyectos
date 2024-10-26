@@ -32,7 +32,7 @@ class ProyectoController:
         connection.close()
         return proyectos
 
-    def buscar_por_id(self, id):
+    def buscar_por_id(self, id: int):
         connection = self.conectar()
         cursor = connection.cursor()
         query = "SELECT * FROM Proyecto WHERE id = %s"
@@ -42,10 +42,10 @@ class ProyectoController:
         connection.close()
         return proyecto
 
-    def buscar_por_nombre(self, nombre):
+    def buscar_por_nombre(self, nombre: str):
         connection = self.conectar()
         cursor = connection.cursor()
-        cursor.execute(f"SELECT * FROM Proyecto WHERE nombre LIKE '{nombre}%'")
+        cursor.execute("SELECT * FROM Proyecto WHERE nombre = %s", (nombre,))
         proyecto = cursor.fetchone()
         cursor.close()
         connection.close()
