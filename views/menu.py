@@ -23,10 +23,11 @@ def menu_empleado():
 def menu_departamento():
     print("2.1 Crear Departamento")
     print("2.2 Listar Departamentos")
-    print("2.3 Buscar Departamento")
-    print("2.4 Modificar Departamento")
-    print("2.5 Eliminar Departamento")
-    print("2.6 Volver al menu Principal")
+    print("2.3 Buscar Departamento por id")
+    print("2.4 Buscar Departamento por nombre")
+    print("2.5 Modificar Departamento")
+    print("2.6 Eliminar Departamento")
+    print("2.7 Volver al menu Principal")
 
 
 def menu_proyecto():

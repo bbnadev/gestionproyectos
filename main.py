@@ -45,10 +45,12 @@ def main():
                 elif sub_opcion == "2.3":
                     dept_view.buscar_por_id()
                 elif sub_opcion == "2.4":
-                    dept_view.modificar()
+                    dept_view.buscar_por_nombre()
                 elif sub_opcion == "2.5":
-                    dept_view.eliminar()
+                    dept_view.modificar()
                 elif sub_opcion == "2.6":
+                    dept_view.eliminar()
+                elif sub_opcion == "2.7":
                     break
 
         elif opcion == "3":
