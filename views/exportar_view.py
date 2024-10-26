@@ -1,5 +1,5 @@
-import pandas as pd
 from controllers.exportar_controller import ExportarController
+
 
 class ExportarView:
     def __init__(self):
