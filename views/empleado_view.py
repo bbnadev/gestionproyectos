@@ -16,6 +16,10 @@ class EmpleadoView:
             print("El RUT debe tener un guión.")
             return
 
+        if len(rut.split("-")[0]) == 0:
+            print("El RUT debe tener dígitos antes del verificador.")
+            return
+
         if len(rut.split("-")[1]) != 1:
             print("El RUT debe tener un dígito verificador.")
             return
@@ -57,7 +61,7 @@ class EmpleadoView:
             return
 
         deptController = DepartamentoController()
-        if not deptController.buscar_por_id(int(dept_id)):
+        if not deptController.buscar_por_id(dept_id):
             print("No existe un departamento con ese ID.")
             return
 
@@ -93,6 +97,10 @@ class EmpleadoView:
             print("El RUT debe tener un guión.")
             return
 
+        if len(rut.split("-")[0]) == 0:
+            print("El RUT debe tener dígitos antes del verificador.")
+            return
+
         if len(rut.split("-")[1]) != 1:
             print("El RUT debe tener un dígito verificador.")
             return
@@ -105,6 +113,9 @@ class EmpleadoView:
 
     def buscar_por_id(self):
         id_empleado = input("Ingrese el ID del empleado a buscar: ")
+        if not id_empleado:
+            print("El ID es requerido.")
+            return
         empleado = self.controller.buscar_por_id(id_empleado)
         if not empleado:
             print("Empleado no encontrado.")
@@ -120,6 +131,10 @@ class EmpleadoView:
 
         if len(rut.split("-")) != 2:
             print("El RUT debe tener un guión.")
+            return
+
+        if len(rut.split("-")[0]) == 0:
+            print("El RUT debe tener dígitos antes del verificador.")
             return
 
         if len(rut.split("-")[1]) != 1:
@@ -182,6 +197,10 @@ class EmpleadoView:
 
         if len(rut.split("-")) != 2:
             print("El RUT debe tener un guión.")
+            return
+
+        if len(rut.split("-")[0]) == 0:
+            print("El RUT debe tener dígitos antes del verificador.")
             return
 
         if len(rut.split("-")[1]) != 1:
