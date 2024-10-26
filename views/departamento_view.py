@@ -7,6 +7,14 @@ class DepartamentoView:
 
     def crear(self):
         nombre = input("Ingrese el nombre del departamento: ")
+        if not nombre:
+            print("El nombre del departamento no puede estar vacío.")
+            return
+
+        if self.controller.buscar_por_nombre(nombre):
+            print("Ya existe un departamento con ese nombre.")
+            return
+
         gerente_id = input("Ingrese el id del gerente (Opcional): ")
         gerente_id = int(gerente_id) if gerente_id else None
 
@@ -16,20 +24,41 @@ class DepartamentoView:
 
     def listar(self):
         departamentos = self.controller.listar()
+        if not departamentos:
+            print("No hay departamentos registrados.")
+            return
+
         for departamento in departamentos:
             print(departamento)
 
     def buscar_por_id(self):
         id_departamento = input("Ingrese el id del departamento: ")
+        if not id_departamento:
+            print("El id del departamento no puede estar vacío.")
+            return
+
         dept = self.controller.buscar_por_id(id_departamento)
         if not dept:
             print("Departamento no encontrado")
             return
+        print(dept)
 
+    def buscar_por_nombre(self):
+        nombre_dept = input("Ingrese el nombre del departamento: ")
+        if not nombre_dept:
+            print("El nombre del departamento no puede estar vacío.")
+            return
+        dept = self.controller.buscar_por_nombre(nombre_dept)
+        if not dept:
+            print("Departamento no encontrado")
+            return
         print(dept)
 
     def modificar(self):
         id_departamento = input("Ingrese el id del departamento a modificar: ")
+        if not id_departamento:
+            print("El id del departamento no puede estar vacío.")
+            return
         dept = self.controller.buscar_por_id(id_departamento)
         if not dept:
             print("Departamento no encontrado")
@@ -53,6 +82,10 @@ class DepartamentoView:
 
     def eliminar(self):
         id_departamento = input("Ingrese el id del departamento a eliminar: ")
+        if not id_departamento:
+            print("El id del departamento no puede estar vacío.")
+            return
+
         dept = self.controller.buscar_por_id(id_departamento)
         if not dept:
             print("Departamento no encontrado")

@@ -44,6 +44,16 @@ class DepartamentoController:
         connection.close()
         return departamento
 
+    def buscar_por_nombre(self, nombre: str):
+        connection = self.conectar()
+        cursor = connection.cursor()
+        query = "SELECT * FROM Departamento WHERE nombre = %s"
+        cursor.execute(query, (nombre,))
+        departamento = cursor.fetchone()
+        cursor.close()
+        connection.close()
+        return departamento
+
     def modificar(self, departamento: Departamento):
         connection = self.conectar()
         cursor = connection.cursor()
