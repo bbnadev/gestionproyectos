@@ -39,6 +39,10 @@ class EmpleadoView:
             print("El teléfono es requerido.")
             return
 
+        if not telefono.isdigit():
+            print("El teléfono debe ser numérico.")
+            return
+
         email = input("Ingrese el email del empleado: ")
         if not email:
             print("El email es requerido.")
@@ -158,6 +162,10 @@ class EmpleadoView:
         telefono = input("Ingrese el nuevo teléfono: ")
         if not telefono:
             telefono = empleado.get_telefono()
+
+        if not telefono.isdigit():
+            print("El teléfono debe ser numérico.")
+            return
 
         email = input("Ingrese el email: ")
         if not email:
