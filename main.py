@@ -1,15 +1,12 @@
 # main.py
-from views.menu import menu_principal, menu_empleado, menu_departamento, menu_proyecto, menu_registro_tiempo, menu_exportar
+from views.menu import menu_principal, menu_empleado, menu_departamento, menu_proyecto, menu_registro_tiempo, menu_exportar, menu_indicadores_economicos, menu_inicio
 from views.proyecto_view import ProyectoView
 from views.empleado_view import EmpleadoView
 from views.departamento_view import DepartamentoView
 from views.registro_tiempo_view import RegistroTiempoView
 from views.exportar_view import ExportarView
-from controllers.auth_controller import AuthController
-
-
-authController = AuthController()
-
+from views.auth_view import AuthView
+from views.indicadores_view import IndicadoresView
 
 # def limpiar_consola():
 #     import os
@@ -20,320 +17,135 @@ def main():
     usuario_actual = None
     while True:
         if not usuario_actual:
-            print("--- Inicio de sesión ---")
-            print("1. Iniciar sesión")
-            print("2. Registrarse")
-            print("q. Salir")
+            menu_inicio()
+            authView = AuthView()
             # opt = msvcrt.getch().decode('utf-8').lower()
             opt = input("Seleccione una opción: ")
             match opt:
-
                 case "1":
-                    while True:
-                        try:
-                            usuario = input("Usuario: ")
-                            if len(usuario) < 1:
-                                raise ValueError(
-                                    "El usuario no puede estar vacío")
-                            if len(usuario) > 50:
-                                raise ValueError(
-                                    "El usuario no puede tener más de 50 caracteres")
-
-                            password = input("Contraseña: ")
-                            if len(password) < 1:
-                                raise ValueError(
-                                    "La contraseña no puede estar vacía")
-                            if len(password) > 255:
-                                raise ValueError(
-                                    "La contraseña no puede tener más de 255 caracteres")
-
-                            if authController.autenticar_usuario(usuario, password):
-                                usuario_actual = usuario
-                                print("Inicio de sesión exitoso.")
-                                break
-                            else:
-                                print("Credenciales incorrectas.")
-                                break
-                        except ValueError as ve:
-                            print(ve)
+                    usuario_actual = authView.autenticar()
                 case "2":
-                    while True:
-                        try:
-                            usuario = input("Nuevo usuario: ")
-                            if len(usuario) < 1:
-                                raise ValueError(
-                                    "El usuario no puede estar vacío")
-                            if len(usuario) > 50:
-                                raise ValueError(
-                                    "El usuario no puede tener más de 50 caracteres")
-
-                            password = input("Contraseña: ")
-                            if len(password) < 0:
-                                raise ValueError(
-                                    "La contraseña no puede estar vacía")
-                            if len(password) > 255:
-                                raise ValueError(
-                                    "La contraseña no puede tener más de 255 caracteres")
-
-                            authController.registrar_usuario(usuario, password)
-                            print("Usuario registrado exitosamente.")
-                            break
-                        except ValueError as ve:
-                            print(ve)
+                    authView.registrar()
                 case "q":
                     break
         else:
-
             menu_principal()
             opcion = input("Seleccione una opción: ")
+            match opcion:
+                case "1":
+                    empleado_view = EmpleadoView()
+                    while True:
+                        menu_empleado()
+                        sub_opcion = input("Seleccione una opción: ")
+                        match sub_opcion:
+                            case "1.1":
+                                empleado_view.crear()
+                            case "1.2":
+                                empleado_view.listar()
+                            case "1.3":
+                                empleado_view.buscar_por_rut()
+                            case "1.4":
+                                empleado_view.buscar_por_id()
+                            case "1.5":
+                                empleado_view.modificar()
+                            case "1.6":
+                                empleado_view.eliminar()
+                            case "q":
+                                break
+                case "2":
+                    dept_view = DepartamentoView()
+                    while True:
+                        menu_departamento()
+                        sub_opcion = input("Seleccione una opción: ")
+                        match sub_opcion:
+                            case "2.1":
+                                dept_view.crear()
+                            case "2.2":
+                                dept_view.listar()
+                            case "2.3":
+                                dept_view.buscar_por_id()
+                            case "2.4":
+                                dept_view.buscar_por_nombre()
+                            case "2.5":
+                                dept_view.modificar()
+                            case "2.6":
+                                dept_view.eliminar()
+                            case "q":
+                                break
 
-            if opcion == "1":
-                empleado_view = EmpleadoView()
-                while True:
-                    menu_empleado()
-                    sub_opcion = input("Seleccione una opción: ")
-
-                    if sub_opcion == "1.1":
-                        empleado_view.crear()
-                    elif sub_opcion == "1.2":
-                        empleado_view.listar()
-                    elif sub_opcion == "1.3":
-                        empleado_view.buscar_por_rut()
-                    elif sub_opcion == "1.4":
-                        empleado_view.buscar_por_id()
-                    elif sub_opcion == "1.5":
-                        empleado_view.modificar()
-                    elif sub_opcion == "1.6":
-                        empleado_view.eliminar()
-                    elif sub_opcion == "1.7":
-                        break
-
-            elif opcion == "2":
-                dept_view = DepartamentoView()
-                while True:
-                    menu_departamento()
-                    sub_opcion = input("Seleccione una opción: ")
-                    if sub_opcion == "2.1":
-                        dept_view.crear()
-                    elif sub_opcion == "2.2":
-                        dept_view.listar()
-                    elif sub_opcion == "2.3":
-                        dept_view.buscar_por_id()
-                    elif sub_opcion == "2.4":
-                        dept_view.buscar_por_nombre()
-                    elif sub_opcion == "2.5":
-                        dept_view.modificar()
-                    elif sub_opcion == "2.6":
-                        dept_view.eliminar()
-                    elif sub_opcion == "2.7":
-                        break
-
-            elif opcion == "3":
-                proyecto_view = ProyectoView()
-                while True:
-                    menu_proyecto()
-                    sub_opcion = input("Seleccione una opción: ")
-                    if sub_opcion == "3.1":
-                        proyecto_view.crear()
-                    elif sub_opcion == "3.2":
-                        proyecto_view.listar()
-                    elif sub_opcion == "3.3":
-                        proyecto_view.buscar_por_id()
-                    elif sub_opcion == "3.4":
-                        proyecto_view.buscar_por_nombre()
-                    elif sub_opcion == "3.5":
-                        proyecto_view.modificar()
-                    elif sub_opcion == "3.6":
-                        proyecto_view.eliminar()
-                    elif sub_opcion == "3.7":
-                        proyecto_view.agregar_empleado()
-                    elif sub_opcion == "3.8":
-                        proyecto_view.quitar_empleado()
-                    elif sub_opcion == "3.9":
-                        proyecto_view.listar_empleados()
-                    elif sub_opcion == "3.10":
-                        break
-            elif opcion == "4":
-                registro_tiempo_view = RegistroTiempoView()
-                while True:
-                    menu_registro_tiempo()
-                    sub_opcion = input("Seleccione una opción: ")
-                    if sub_opcion == "4.1":
-                        registro_tiempo_view.crear()
-                    elif sub_opcion == "4.2":
-                        registro_tiempo_view.listar()
-                    elif sub_opcion == "4.3":
-                        registro_tiempo_view.buscar_por_id()
-                    elif sub_opcion == "4.4":
-                        registro_tiempo_view.modificar()
-                    elif sub_opcion == "4.5":
-                        registro_tiempo_view.buscar_por_id()
-                    elif sub_opcion == "4.6":
-                        break
-            elif opcion == "5":
-                exportar_view = ExportarView()
-                while True:
-                    menu_exportar()
-                    sub_opcion = input("Seleccione una opción: ")
-                    if sub_opcion == "5.1":
-                        exportar_view.exportar_excel()
-                    if sub_opcion == "5.2":
-                        exportar_view.exportar_pdf()
-                    if sub_opcion == "5.3":
-                        break
-            elif opcion == "6":
-                print("Saliendo del sistema...")
-                break
-
-
-if __name__ == "__main__":
-    main()
-
-
-"""
-from views.menu import menu_principal, menu_empleado
-from controllers.empleado_controller import EmpleadoController
-from models.empleado import Empleado
-
-# Instancia del controlador de empleados
-empleado_controller = EmpleadoController()
-
-def main():
-    while True:
-        menu_principal()
-        opcion = input("Seleccione una opción: ")
-        
-        if opcion == "1":
-            while True:
-                menu_empleado()
-                sub_opcion = input("Seleccione una opción: ")
-                
-                if sub_opcion == "1.1":
-                    # Código para crear empleado
-                    rut = input("Ingrese el RUT del empleado: ")
-                    nombre = input("Ingrese el nombre del empleado: ")
-                    direccion = input("Ingrese la dirección del empleado: ")
-                    telefono = input("Ingrese el teléfono del empleado: ")
-                    email = input("Ingrese el email del empleado: ")
-                    fecha_inicio = input("Ingrese la fecha de inicio (YYYY-MM-DD): ")
-                    salario = float(input("Ingrese el salario del empleado: "))
-                    departamento_id = int(input("Ingrese el ID del departamento: "))
-
-                    nuevo_empleado = Empleado(
-                        rut=rut, 
-                        nombre=nombre, 
-                        direccion=direccion, 
-                        telefono=telefono, 
-                        email=email, 
-                        fecha_inicio=fecha_inicio, 
-                        salario=salario, 
-                        departamento_id=departamento_id
-                    )
-                    
-                    empleado_controller.crear_empleado(nuevo_empleado)
-                    print("Empleado creado exitosamente.")
-
-                elif sub_opcion == "1.2":
-                    # Código para listar empleados
-                    empleados = empleado_controller.listar_empleados()
-                    for emp in empleados:
-                        print(emp)
-
-                elif sub_opcion == "1.3":
-                    # Código para buscar empleado por RUT
-                    rut = input("Ingrese el RUT del empleado a buscar: ")
-                    empleado = empleado_controller.buscar_empleado_por_rut(rut)
-                    if empleado:
-                        print(empleado)
-                    else:
-                        print("Empleado no encontrado.")
-
-                elif sub_opcion == "1.4":
-                    # Código para modificar empleado
-                    rut = input("Ingrese el RUT del empleado a modificar: ")
-                    empleado = empleado_controller.buscar_empleado_por_rut(rut)
-                    if empleado:
-                        nombre = input("Ingrese el nuevo nombre del empleado: ")
-                        direccion = input("Ingrese la nueva dirección del empleado: ")
-                        telefono = input("Ingrese el nuevo teléfono del empleado: ")
-                        email = input("Ingrese el nuevo email del empleado: ")
-                        fecha_inicio = input("Ingrese la nueva fecha de inicio (YYYY-MM-DD): ")
-                        salario = float(input("Ingrese el nuevo salario del empleado: "))
-                        departamento_id = int(input("Ingrese el nuevo ID del departamento: "))
-
-                        empleado_modificado = Empleado(
-                            id=empleado[0],
-                            rut=rut,
-                            nombre=nombre,
-                            direccion=direccion,
-                            telefono=telefono,
-                            email=email,
-                            fecha_inicio=fecha_inicio,
-                            salario=salario,
-                            departamento_id=departamento_id
-                        )
-                        
-                        empleado_controller.modificar_empleado(empleado_modificado)
-                        print("Empleado modificado exitosamente.")
-                    else:
-                        print("Empleado no encontrado.")
-
-                elif sub_opcion == "1.5":
-                    # Código para eliminar empleado
-                    rut = input("Ingrese el RUT del empleado a eliminar: ")
-                    empleado_controller.eliminar_empleado(rut)
-                    print("Empleado eliminado exitosamente.")
-
-                elif sub_opcion == "1.6":
-                    break
-
-        elif opcion == "3":
-            print("Saliendo del sistema...")
-            break
-
-if __name__ == "__main__":
-    main()
-"""
-
-
-"""# main.py
-from views.menu import menu_principal, menu_empleado
-from controllers.empleado_controller import EmpleadoController
-from models.empleado import Empleado
-
-db_config = {
-    'user': 'tu_usuario',
-    'password': 'tu_contraseña',
-    'host': 'localhost',
-    'database': 'gestionproyectos'
-}
-
-empleado_controller = EmpleadoController(db_config)
-
-def main():
-    while True:
-        menu_principal()
-        opcion = input("Seleccione una opción: ")
-        
-        if opcion == "1":
-            while True:
-                menu_empleado()
-                sub_opcion = input("Seleccione una opción: ")
-                
-                if sub_opcion == "1.1":
-                    # Código para crear empleado
+                case "3":
+                    proyecto_view = ProyectoView()
+                    while True:
+                        menu_proyecto()
+                        sub_opcion = input("Seleccione una opción: ")
+                        match sub_opcion:
+                            case "3.1":
+                                proyecto_view.crear()
+                            case "3.2":
+                                proyecto_view.listar()
+                            case "3.3":
+                                proyecto_view.buscar_por_id()
+                            case "3.4":
+                                proyecto_view.buscar_por_nombre()
+                            case "3.5":
+                                proyecto_view.modificar()
+                            case "3.6":
+                                proyecto_view.eliminar()
+                            case "3.7":
+                                proyecto_view.agregar_empleado()
+                            case "3.8":
+                                proyecto_view.quitar_empleado()
+                            case "3.9":
+                                proyecto_view.listar_empleados()
+                            case "q":
+                                break
+                case "4":
+                    registro_tiempo_view = RegistroTiempoView()
+                    while True:
+                        menu_registro_tiempo()
+                        sub_opcion = input("Seleccione una opción: ")
+                        match sub_opcion:
+                            case "4.1":
+                                registro_tiempo_view.crear()
+                            case "4.2":
+                                registro_tiempo_view.listar()
+                            case "4.3":
+                                registro_tiempo_view.buscar_por_id()
+                            case "4.4":
+                                registro_tiempo_view.modificar()
+                            case "4.5":
+                                registro_tiempo_view.buscar_por_id()
+                            case "q":
+                                break
+                case "5":
+                    exportar_view = ExportarView()
+                    while True:
+                        menu_exportar()
+                        sub_opcion = input("Seleccione una opción: ")
+                        match sub_opcion:
+                            case "5.1":
+                                exportar_view.exportar_excel()
+                            case "5.2":
+                                exportar_view.exportar_pdf()
+                            case "q":
+                                break
+                case "6":
+                    indicadoresView = IndicadoresView()
+                    while True:
+                        menu_indicadores_economicos()
+                        sub_opcion = input("Seleccione una opción: ")
+                        match sub_opcion:
+                            case "6.1":
+                                pass
+                            case "6.2":
+                                pass
+                            case "q":
+                                break
                     pass
-                elif sub_opcion == "1.2":
-                    # Código para listar empleados
-                    empleados = empleado_controller.listar_empleados()
-                    for empleado in empleados:
-                        print(empleado)
-                elif sub_opcion == "1.6":
+                case "q":
+                    print("Saliendo del sistema...")
                     break
-                # Agregar más casos para otras opciones
-        elif opcion == "3":
-            break
+
 
 if __name__ == "__main__":
     main()
-"""
