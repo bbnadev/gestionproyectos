@@ -29,7 +29,7 @@ class AuthController:
         cursor = connection.cursor()
         query = "SELECT password_hash FROM Usuario WHERE username = %s"
         cursor.execute(query, (usuario,))
-        usuario = self.db.cursor.fetchone()
+        usuario = cursor.fetchone()
         if usuario:
             return bcrypt.checkpw(password.encode('utf-8'), usuario[0].encode('utf-8'))
         return False
