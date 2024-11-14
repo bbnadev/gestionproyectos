@@ -1,5 +1,11 @@
 # views/menu.py
 
+def menu_inicio():
+    print("--- Inicio de sesión ---")
+    print("1. Iniciar sesión")
+    print("2. Registrarse")
+    print("q. Salir")
+
 def menu_principal():
     print("--- Menu Principal ---")
     print("1. Registro de Empleados")
@@ -61,3 +67,8 @@ def menu_exportar():
     print("5.1 Exportar Excel")
     print("5.2 Exportar PDF")
     print("5.3 Volver al menu principal")
+
+def menu_indicadores_economicos():
+    print("--- Indicadores Económicos ---")
+    # TODO
+    print("q. Volver al menu principal")
