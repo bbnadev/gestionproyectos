@@ -6,6 +6,7 @@ def menu_inicio():
     print("2. Registrarse")
     print("q. Salir")
 
+
 def menu_principal():
     print("--- Menu Principal ---")
     print("1. Registro de Empleados")
@@ -13,7 +14,8 @@ def menu_principal():
     print("3. Gestion de Proyectos")
     print("4. Gestion de Registro de Tiempo")
     print("5. Exportar")
-    print("6. Salir")
+    print("6. Indicadores Económicos")
+    print("q. Salir")
 
 
 def menu_empleado():
@@ -24,7 +26,7 @@ def menu_empleado():
     print("1.4 Buscar Empleado por ID")
     print("1.5 Modificar Empleado")
     print("1.6 Eliminar Empleado")
-    print("1.7 Volver al menu Principal")
+    print("q. Volver al menu Principal")
 
 
 def menu_departamento():
@@ -35,7 +37,7 @@ def menu_departamento():
     print("2.4 Buscar Departamento por nombre")
     print("2.5 Modificar Departamento")
     print("2.6 Eliminar Departamento")
-    print("2.7 Volver al menu Principal")
+    print("q. Volver al menu Principal")
 
 
 def menu_proyecto():
@@ -49,7 +51,7 @@ def menu_proyecto():
     print("3.7 Agregar Empleado a Proyecto")
     print("3.8 Remover Empleado de Proyecto")
     print("3.9 Listar empleados de un Proyecto")
-    print("3.10 Volver al menu Principal")
+    print("q. Volver al menu Principal")
 
 
 def menu_registro_tiempo():
@@ -59,16 +61,18 @@ def menu_registro_tiempo():
     print("4.3 Buscar Registro de Tiempo por id")
     print("4.4 Modificar Registro de Tiempo")
     print("4.5 Eliminar Registro de Tiempo")
-    print("4.6 Volver al menu Principal")
+    print("q. Volver al menu Principal")
 
 
 def menu_exportar():
     print("--- Gestión Exportar ---")
     print("5.1 Exportar Excel")
     print("5.2 Exportar PDF")
-    print("5.3 Volver al menu principal")
+    print("q. Volver al menu principal")
+
 
 def menu_indicadores_economicos():
     print("--- Indicadores Económicos ---")
-    # TODO
+    print("6.1 Consultar Indicadores Económicos")
+    print("6.2 Registrar Indicadores Económicos")
     print("q. Volver al menu principal")
