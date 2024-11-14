@@ -1,7 +1,7 @@
 # views/menu.py
 
 def menu_principal():
-    print("Menu Principal")
+    print("--- Menu Principal ---")
     print("1. Registro de Empleados")
     print("2. Gestión de Departamentos")
     print("3. Gestion de Proyectos")
@@ -11,6 +11,7 @@ def menu_principal():
 
 
 def menu_empleado():
+    print("--- Gestión Empleados ---")
     print("1.1 Crear Empleado")
     print("1.2 Listar Empleado")
     print("1.3 Buscar Empleado por RUT")
@@ -21,6 +22,7 @@ def menu_empleado():
 
 
 def menu_departamento():
+    print("--- Gestión Departamentos ---")
     print("2.1 Crear Departamento")
     print("2.2 Listar Departamentos")
     print("2.3 Buscar Departamento por id")
@@ -31,6 +33,7 @@ def menu_departamento():
 
 
 def menu_proyecto():
+    print("--- Gestión Proyectos ---")
     print("3.1 Crear Proyecto")
     print("3.2 Listar Proyectos")
     print("3.3 Buscar Proyecto por id")
@@ -44,6 +47,7 @@ def menu_proyecto():
 
 
 def menu_registro_tiempo():
+    print("--- Gestión Registros Tiempo ---")
     print("4.1 Crear Registro de Tiempo")
     print("4.2 Listar Registros de Tiempo")
     print("4.3 Buscar Registro de Tiempo por id")
@@ -53,6 +57,7 @@ def menu_registro_tiempo():
 
 
 def menu_exportar():
+    print("--- Gestión Exportar ---")
     print("5.1 Exportar Excel")
     print("5.2 Exportar PDF")
     print("5.3 Volver al menu principal")
