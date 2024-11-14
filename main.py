@@ -5,110 +5,185 @@ from views.empleado_view import EmpleadoView
 from views.departamento_view import DepartamentoView
 from views.registro_tiempo_view import RegistroTiempoView
 from views.exportar_view import ExportarView
+from controllers.auth_controller import AuthController
+
+
+authController = AuthController()
+
+
+# def limpiar_consola():
+#     import os
+#     os.system("cls" if os.name == "nt" else "clear")
 
 
 def main():
+    usuario_actual = None
     while True:
-        menu_principal()
-        opcion = input("Seleccione una opción: ")
+        if not usuario_actual:
+            print("--- Inicio de sesión ---")
+            print("1. Iniciar sesión")
+            print("2. Registrarse")
+            print("q. Salir")
+            # opt = msvcrt.getch().decode('utf-8').lower()
+            opt = input("Seleccione una opción: ")
+            match opt:
 
-        if opcion == "1":
-            empleado_view = EmpleadoView()
-            while True:
-                menu_empleado()
-                sub_opcion = input("Seleccione una opción: ")
+                case "1":
+                    while True:
+                        try:
+                            usuario = input("Usuario: ")
+                            if len(usuario) < 1:
+                                raise ValueError(
+                                    "El usuario no puede estar vacío")
+                            if len(usuario) > 50:
+                                raise ValueError(
+                                    "El usuario no puede tener más de 50 caracteres")
 
-                if sub_opcion == "1.1":
-                    empleado_view.crear()
-                elif sub_opcion == "1.2":
-                    empleado_view.listar()
-                elif sub_opcion == "1.3":
-                    empleado_view.buscar_por_rut()
-                elif sub_opcion == "1.4":
-                    empleado_view.buscar_por_id()
-                elif sub_opcion == "1.5":
-                    empleado_view.modificar()
-                elif sub_opcion == "1.6":
-                    empleado_view.eliminar()
-                elif sub_opcion == "1.7":
-                    break
+                            password = input("Contraseña: ")
+                            if len(password) < 1:
+                                raise ValueError(
+                                    "La contraseña no puede estar vacía")
+                            if len(password) > 255:
+                                raise ValueError(
+                                    "La contraseña no puede tener más de 255 caracteres")
 
-        elif opcion == "2":
-            dept_view = DepartamentoView()
-            while True:
-                menu_departamento()
-                sub_opcion = input("Seleccione una opción: ")
-                if sub_opcion == "2.1":
-                    dept_view.crear()
-                elif sub_opcion == "2.2":
-                    dept_view.listar()
-                elif sub_opcion == "2.3":
-                    dept_view.buscar_por_id()
-                elif sub_opcion == "2.4":
-                    dept_view.buscar_por_nombre()
-                elif sub_opcion == "2.5":
-                    dept_view.modificar()
-                elif sub_opcion == "2.6":
-                    dept_view.eliminar()
-                elif sub_opcion == "2.7":
-                    break
+                            if authController.autenticar_usuario(usuario, password):
+                                usuario_actual = usuario
+                                print("Inicio de sesión exitoso.")
+                                break
+                            else:
+                                print("Credenciales incorrectas.")
+                                break
+                        except ValueError as ve:
+                            print(ve)
+                case "2":
+                    while True:
+                        try:
+                            usuario = input("Nuevo usuario: ")
+                            if len(usuario) < 1:
+                                raise ValueError(
+                                    "El usuario no puede estar vacío")
+                            if len(usuario) > 50:
+                                raise ValueError(
+                                    "El usuario no puede tener más de 50 caracteres")
 
-        elif opcion == "3":
-            proyecto_view = ProyectoView()
-            while True:
-                menu_proyecto()
-                sub_opcion = input("Seleccione una opción: ")
-                if sub_opcion == "3.1":
-                    proyecto_view.crear()
-                elif sub_opcion == "3.2":
-                    proyecto_view.listar()
-                elif sub_opcion == "3.3":
-                    proyecto_view.buscar_por_id()
-                elif sub_opcion == "3.4":
-                    proyecto_view.buscar_por_nombre()
-                elif sub_opcion == "3.5":
-                    proyecto_view.modificar()
-                elif sub_opcion == "3.6":
-                    proyecto_view.eliminar()
-                elif sub_opcion == "3.7":
-                    proyecto_view.agregar_empleado()
-                elif sub_opcion == "3.8":
-                    proyecto_view.quitar_empleado()
-                elif sub_opcion == "3.9":
-                    proyecto_view.listar_empleados()
-                elif sub_opcion == "3.10":
+                            password = input("Contraseña: ")
+                            if len(password) < 0:
+                                raise ValueError(
+                                    "La contraseña no puede estar vacía")
+                            if len(password) > 255:
+                                raise ValueError(
+                                    "La contraseña no puede tener más de 255 caracteres")
+
+                            authController.registrar_usuario(usuario, password)
+                            print("Usuario registrado exitosamente.")
+                            break
+                        except ValueError as ve:
+                            print(ve)
+                case "q":
                     break
-        elif opcion == "4":
-            registro_tiempo_view = RegistroTiempoView()
-            while True:
-                menu_registro_tiempo()
-                sub_opcion = input("Seleccione una opción: ")
-                if sub_opcion == "4.1":
-                    registro_tiempo_view.crear()
-                elif sub_opcion == "4.2":
-                    registro_tiempo_view.listar()
-                elif sub_opcion == "4.3":
-                    registro_tiempo_view.buscar_por_id()
-                elif sub_opcion == "4.4":
-                    registro_tiempo_view.modificar()
-                elif sub_opcion == "4.5":
-                    registro_tiempo_view.buscar_por_id()
-                elif sub_opcion == "4.6":
-                    break
-        elif opcion == "5":
-            exportar_view = ExportarView()
-            while True:
-                menu_exportar()
-                sub_opcion = input("Seleccione una opción: ")
-                if sub_opcion == "5.1":
-                    exportar_view.exportar_excel()
-                if sub_opcion == "5.2":
-                    exportar_view.exportar_pdf()
-                if sub_opcion == "5.3":
-                    break
-        elif opcion == "6":
-            print("Saliendo del sistema...")
-            break
+        else:
+
+            menu_principal()
+            opcion = input("Seleccione una opción: ")
+
+            if opcion == "1":
+                empleado_view = EmpleadoView()
+                while True:
+                    menu_empleado()
+                    sub_opcion = input("Seleccione una opción: ")
+
+                    if sub_opcion == "1.1":
+                        empleado_view.crear()
+                    elif sub_opcion == "1.2":
+                        empleado_view.listar()
+                    elif sub_opcion == "1.3":
+                        empleado_view.buscar_por_rut()
+                    elif sub_opcion == "1.4":
+                        empleado_view.buscar_por_id()
+                    elif sub_opcion == "1.5":
+                        empleado_view.modificar()
+                    elif sub_opcion == "1.6":
+                        empleado_view.eliminar()
+                    elif sub_opcion == "1.7":
+                        break
+
+            elif opcion == "2":
+                dept_view = DepartamentoView()
+                while True:
+                    menu_departamento()
+                    sub_opcion = input("Seleccione una opción: ")
+                    if sub_opcion == "2.1":
+                        dept_view.crear()
+                    elif sub_opcion == "2.2":
+                        dept_view.listar()
+                    elif sub_opcion == "2.3":
+                        dept_view.buscar_por_id()
+                    elif sub_opcion == "2.4":
+                        dept_view.buscar_por_nombre()
+                    elif sub_opcion == "2.5":
+                        dept_view.modificar()
+                    elif sub_opcion == "2.6":
+                        dept_view.eliminar()
+                    elif sub_opcion == "2.7":
+                        break
+
+            elif opcion == "3":
+                proyecto_view = ProyectoView()
+                while True:
+                    menu_proyecto()
+                    sub_opcion = input("Seleccione una opción: ")
+                    if sub_opcion == "3.1":
+                        proyecto_view.crear()
+                    elif sub_opcion == "3.2":
+                        proyecto_view.listar()
+                    elif sub_opcion == "3.3":
+                        proyecto_view.buscar_por_id()
+                    elif sub_opcion == "3.4":
+                        proyecto_view.buscar_por_nombre()
+                    elif sub_opcion == "3.5":
+                        proyecto_view.modificar()
+                    elif sub_opcion == "3.6":
+                        proyecto_view.eliminar()
+                    elif sub_opcion == "3.7":
+                        proyecto_view.agregar_empleado()
+                    elif sub_opcion == "3.8":
+                        proyecto_view.quitar_empleado()
+                    elif sub_opcion == "3.9":
+                        proyecto_view.listar_empleados()
+                    elif sub_opcion == "3.10":
+                        break
+            elif opcion == "4":
+                registro_tiempo_view = RegistroTiempoView()
+                while True:
+                    menu_registro_tiempo()
+                    sub_opcion = input("Seleccione una opción: ")
+                    if sub_opcion == "4.1":
+                        registro_tiempo_view.crear()
+                    elif sub_opcion == "4.2":
+                        registro_tiempo_view.listar()
+                    elif sub_opcion == "4.3":
+                        registro_tiempo_view.buscar_por_id()
+                    elif sub_opcion == "4.4":
+                        registro_tiempo_view.modificar()
+                    elif sub_opcion == "4.5":
+                        registro_tiempo_view.buscar_por_id()
+                    elif sub_opcion == "4.6":
+                        break
+            elif opcion == "5":
+                exportar_view = ExportarView()
+                while True:
+                    menu_exportar()
+                    sub_opcion = input("Seleccione una opción: ")
+                    if sub_opcion == "5.1":
+                        exportar_view.exportar_excel()
+                    if sub_opcion == "5.2":
+                        exportar_view.exportar_pdf()
+                    if sub_opcion == "5.3":
+                        break
+            elif opcion == "6":
+                print("Saliendo del sistema...")
+                break
 
 
 if __name__ == "__main__":
