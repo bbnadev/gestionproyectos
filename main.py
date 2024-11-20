@@ -136,7 +136,7 @@ def main():
                         sub_opcion = input("Seleccione una opción: ")
                         match sub_opcion:
                             case "6.1":
-                                pass
+                                indicadoresView.consultar()
                             case "6.2":
                                 pass
                             case "q":
