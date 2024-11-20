@@ -33,6 +33,9 @@ class IndicadoresView:
                     info("ivp")
                 case "3":
                     info("dolar")
+                    data = requests.get(api + "dolar").json()
+
+                    print(data)
                 case "4":
                     info("dolar_intercambio")
                 case "5":
@@ -54,17 +57,6 @@ class IndicadoresView:
                 case "q":
                     break
 
-
-def info(indicador: str):
-    data: dict = requests.get(api + indicador).json()
-    print("-"*50)
-    print(f"Código: {data['codigo']}")
-    print(f"Nombre: {data['nombre']}")
-    print(f"Unidad de Medida: {data['unidad_medida']}")
-    print(f"Fecha: {data['serie'][0]['fecha'][:10]}")
-    print(f"Valor: {data['serie'][0]['valor']}")
-    print("-"*50, "\n")
-
     """
     Registro de indicadores Económicos:
     La empresa debe registrar los datos consultados cuando el usuario lo requiera, para ello deberá almacenar en la base de datos el nombre del indicador, la fecha en que registra el valor, la fecha en que el usuario realiza la consulta, el usuario que la realiza y el sitio que provee los indicadores.
@@ -76,4 +68,38 @@ def info(indicador: str):
         - Sitio web
     """
 
-    def registrar(self):
+    def registrar(self, auth_user):
+        id_indicador = input(
+            "uf, ivp. dolar, dolar_intercambio, euro, ipc, utm, imacec, tpm, libra_cobre, tasa_desempleo, bitcoin\nIngrese el nombre del indicador: ").lower()
+        if not id_indicador in ["uf", "ivp", "dolar", "dolar_intercambio", "euro", "ipc", "utm", "imacec", "tpm", "libra_cobre", "tasa_desempleo", "bitcoin"]:
+            print("Indicador no válido")
+            return
+
+        fecha_registro = input("Ingrese la fecha de registro del indicador: ")
+
+        data: dict = requests.get(api + id_indicador).json()
+
+        fechas: list = data['serie']
+        index = 0
+        for item in fechas:
+            if item['fecha'][:10] == fecha_registro:
+                index = fechas.index(item)
+
+        indicador = Indicador(
+            nombre=data['nombre'],
+            fecha_registro=fecha_registro,
+            valor=fechas[index]['valor'],
+            usuario=auth_user,
+        )
+        # TODO guardar en base de datos
+
+
+def info(indicador: str):
+    data: dict = requests.get(api + indicador).json()
+    print("-"*50)
+    print(f"Código: {data['codigo']}")
+    print(f"Nombre: {data['nombre']}")
+    print(f"Unidad de Medida: {data['unidad_medida']}")
+    print(f"Fecha: {data['serie'][0]['fecha'][:10]}")
+    print(f"Valor: {data['serie'][0]['valor']}")
+    print("-"*50, "\n")
