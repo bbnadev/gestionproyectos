@@ -11,3 +11,7 @@ class IndicadorController:
         return mysql.connector.connect(**self.db_config)
 
     # TODO
+    def crear(self):
+        pass
+
+    # TODO
