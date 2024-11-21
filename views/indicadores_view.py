@@ -18,13 +18,22 @@ class IndicadoresView:
 
     def consultar(self):
         while True:
-            data: dict = requests.get(api).json()
-            i = 0
-            for _, value in data.items():
-                if isinstance(value, dict):
-                    i += 1
-                    print(f"{f"{i}.": >3} {value['nombre']}")
-            print(f"{f"q.": >3} Salir")
+
+            # Unidad de Fomento (UF), Índice de valor Promedio (IVP), Índice de Precio al Consumidor (IPC), Unidad Tributaria Mensual (UTM), Dólar Observado, Euro. 
+
+            # data: dict = requests.get(api).json()
+            # i = 0
+            # for _, value in data.items():
+            #     if isinstance(value, dict):
+            #         i += 1
+            #         print(f"{f"{i}.": >3} {value['nombre']}")
+            print("1. Unidad de Fomento (UF)")
+            print("2. Índice de valor Promedio (IVP)")
+            print("3. Índice de Precio al Consumidor (IPC)")
+            print("4. Unidad Tributaria Mensual (UTM)")
+            print("5. Dólar Observado")
+            print("6. Euro")
+            print("q. Salir")
             opcion = input("Seleccione una opción: ")
             match opcion:
                 case "1":
@@ -32,28 +41,13 @@ class IndicadoresView:
                 case "2":
                     info("ivp")
                 case "3":
-                    info("dolar")
-                    data = requests.get(api + "dolar").json()
-
-                    print(data)
-                case "4":
-                    info("dolar_intercambio")
-                case "5":
-                    info("euro")
-                case "6":
                     info("ipc")
-                case "7":
+                case "4":
                     info("utm")
-                case "8":
-                    info("imacec")
-                case "9":
-                    info("tpm")
-                case "10":
-                    info("libra_cobre")
-                case "11":
-                    info("tasa_desempleo")
-                case "12":
-                    info("bitcoin")
+                case "5":
+                    info("dolar")
+                case "6":
+                    info("euro")
                 case "q":
                     break
 
@@ -69,33 +63,53 @@ class IndicadoresView:
     """
 
     def registrar(self, auth_user):
-        id_indicador = input(
-            "uf, ivp. dolar, dolar_intercambio, euro, ipc, utm, imacec, tpm, libra_cobre, tasa_desempleo, bitcoin\nIngrese el nombre del indicador: ").lower()
-        if not id_indicador in ["uf", "ivp", "dolar", "dolar_intercambio", "euro", "ipc", "utm", "imacec", "tpm", "libra_cobre", "tasa_desempleo", "bitcoin"]:
-            print("Indicador no válido")
-            return
+            print("1. Unidad de Fomento (UF)")
+            print("2. Índice de valor Promedio (IVP)")
+            print("3. Índice de Precio al Consumidor (IPC)")
+            print("4. Unidad Tributaria Mensual (UTM)")
+            print("5. Dólar Observado")
+            print("6. Euro")
+            print("q. Salir")
+            opcion = input("Seleccione una opción: ")
+            # match opcion:
+            #     case "1":
+            #         info("uf")
+            #     case "2":
+            #         info("ivp")
+            #     case "3":
+            #         info("ipc")
+            #     case "4":
+            #         info("utm")
+            #     case "5":
+            #         info("dolar")
+            #     case "6":
+            #         info("euro")
+            #     case "q":
+            #         break
+                
 
-        fecha_registro = input("Ingrese la fecha de registro del indicador: ")
+            # fecha_registro = input("Ingrese la fecha de registro del indicador: ")
 
-        data: dict = requests.get(api + id_indicador).json()
+            # data: dict = requests.get(api + id_indicador).json()
 
-        fechas: list = data['serie']
-        index = 0
-        for item in fechas:
-            if item['fecha'][:10] == fecha_registro:
-                index = fechas.index(item)
+            # fechas: list = data['serie']
+            # index = 0
+            # for item in fechas:
+            #     if item['fecha'][:10] == fecha_registro:
+            #         index = fechas.index(item)
 
-        indicador = Indicador(
-            nombre=data['nombre'],
-            fecha_registro=fecha_registro,
-            valor=fechas[index]['valor'],
-            usuario=auth_user,
-        )
-        # TODO guardar en base de datos
+            # indicador = Indicador(
+            #     nombre=data['nombre'],
+            #     fecha_registro=fecha_registro,
+            #     valor=fechas[index]['valor'],
+            #     usuario=auth_user,
+            # )
+            # TODO guardar en base de datos
 
 
 def info(indicador: str):
     data: dict = requests.get(api + indicador).json()
+    print("\n")
     print("-"*50)
     print(f"Código: {data['codigo']}")
     print(f"Nombre: {data['nombre']}")
