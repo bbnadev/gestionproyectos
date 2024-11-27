@@ -1,9 +1,9 @@
-from datetime import datetime
+from datetime import datetime, date
 
 
 class Indicador:
     # nombre del indicador, la fecha en que registra el valor, la fecha en que el usuario realiza la consulta, el usuario que la realiza y el sitio que provee los indicadores.
-    def __init__(self, id=None, nombre="", fecha_registro=None, fecha_consulta=datetime.date(datetime.now()), valor=0.0, usuario="", sitio="mindicador.cl"):
+    def __init__(self, id=None, nombre="", fecha_registro=None, fecha_consulta=date.today(), valor=0.0, usuario="", sitio="mindicador.cl"):
         self._id = id
         self._nombre = nombre
         self._fecha_registro = fecha_registro
