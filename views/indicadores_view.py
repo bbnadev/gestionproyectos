@@ -2,7 +2,7 @@ from controllers.indicadores_controller import IndicadorController, Indicador
 
 import requests
 
-
+from datetime import datetime, date
 api = "https://mindicador.cl/api/"
 
 
@@ -63,57 +63,122 @@ class IndicadoresView:
     """
 
     def registrar(self, auth_user):
-            print("1. Unidad de Fomento (UF)")
-            print("2. Índice de valor Promedio (IVP)")
-            print("3. Índice de Precio al Consumidor (IPC)")
-            print("4. Unidad Tributaria Mensual (UTM)")
-            print("5. Dólar Observado")
-            print("6. Euro")
-            print("q. Salir")
-            opcion = input("Seleccione una opción: ")
-            # match opcion:
-            #     case "1":
-            #         info("uf")
-            #     case "2":
-            #         info("ivp")
-            #     case "3":
-            #         info("ipc")
-            #     case "4":
-            #         info("utm")
-            #     case "5":
-            #         info("dolar")
-            #     case "6":
-            #         info("euro")
-            #     case "q":
-            #         break
-                
+            while True:
+                print("1. Unidad de Fomento (UF)")
+                print("2. Índice de valor Promedio (IVP)")
+                print("3. Índice de Precio al Consumidor (IPC)")
+                print("4. Unidad Tributaria Mensual (UTM)")
+                print("5. Dólar Observado")
+                print("6. Euro")
+                print("q. Salir")
+                opcion = input("Seleccione una opción: ")
+                match opcion:
+                    case "1":
+                        fecha = input("Ingrese fecha (DD-MM-YYYY):")
+                        fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
+                        data: dict = requests.get(f'{api}uf/{fecha}').json()
+                        indicador = Indicador(
+                            nombre=data["codigo"],
+                            fecha_registro=data['serie'][0]['fecha'][:10],
+                            valor=data['serie'][0]['valor'],
+                            usuario=auth_user,
+                        )
+                        id = self.controller.crear(indicador)
+                        print(f"registro creado con id", id)
+                    case "2":
+                        fecha = input("Ingrese fecha (DD-MM-YYYY):")
+                        fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
+                        data: dict = requests.get(f'{api}ivp/{fecha}').json()
+                        indicador = Indicador(
+                            nombre=data["codigo"],
+                            fecha_registro=data['serie'][0]['fecha'][:10],
+                            valor=data['serie'][0]['valor'],
+                            usuario=auth_user,
+                        )
+                        id = self.controller.crear(indicador)
+                        print(f"registro creado con id", id)
+                    case "3":
+                        fecha = input("Ingrese fecha (DD-MM-YYYY):")
+                        fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
+                        data: dict = requests.get(f'{api}ipc/{fecha}').json()
+                        indicador = Indicador(
+                            nombre=data["codigo"],
+                            fecha_registro=data['serie'][0]['fecha'][:10],
+                            valor=data['serie'][0]['valor'],
+                            usuario=auth_user,
+                        )
+                        id = self.controller.crear(indicador)
+                        print(f"registro creado con id", id)
+                    case "4":
+                        fecha = input("Ingrese fecha (DD-MM-YYYY):")
+                        fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
+                        data: dict = requests.get(f'{api}utm/{fecha}').json()
+                        indicador = Indicador(
+                            nombre=data["codigo"],
+                            fecha_registro=data['serie'][0]['fecha'][:10],
+                            valor=data['serie'][0]['valor'],
+                            usuario=auth_user,
+                        )
+                        id = self.controller.crear(indicador)
+                        print(f"registro creado con id", id)
+                    case "5":
+                        indicador = Indicador(
+                            nombre=data["codigo"],
+                            fecha_registro=data['serie'][0]['fecha'][:10],
+                            valor=data['serie'][0]['valor'],
+                            usuario=auth_user,
+                        )
+                        self.controller.crear(indicador)
+                        fecha = input("Ingrese fecha (DD-MM-YYYY):")
+                        fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
+                        data: dict = requests.get(f'{api}dolar/{fecha}').json()
+                        indicador = Indicador(
+                            nombre=data["codigo"],
+                            fecha_registro=data['serie'][0]['fecha'][:10],
+                            valor=data['serie'][0]['valor'],
+                            usuario=auth_user,
+                        )
+                        id = self.controller.crear(indicador)
+                        print(f"registro creado con id", id)
+                    case "6":
+                        fecha = input("Ingrese fecha (DD-MM-YYYY):")
+                        fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
+                        data: dict = requests.get(f'{api}euro/{fecha}').json()
 
-            # fecha_registro = input("Ingrese la fecha de registro del indicador: ")
-
-            # data: dict = requests.get(api + id_indicador).json()
-
-            # fechas: list = data['serie']
-            # index = 0
-            # for item in fechas:
-            #     if item['fecha'][:10] == fecha_registro:
-            #         index = fechas.index(item)
-
-            # indicador = Indicador(
-            #     nombre=data['nombre'],
-            #     fecha_registro=fecha_registro,
-            #     valor=fechas[index]['valor'],
-            #     usuario=auth_user,
-            # )
-            # TODO guardar en base de datos
+                        indicador = Indicador(
+                            nombre=data["codigo"],
+                            fecha_registro=data['serie'][0]['fecha'][:10],
+                            valor=data['serie'][0]['valor'],
+                            usuario=auth_user,
+                        )
+                        id = self.controller.crear(Indicador(indicador))
+                        print(f"registro creado con id", id)
+                    case "q":
+                        break
+        
 
 
 def info(indicador: str):
-    data: dict = requests.get(api + indicador).json()
-    print("\n")
-    print("-"*50)
-    print(f"Código: {data['codigo']}")
-    print(f"Nombre: {data['nombre']}")
-    print(f"Unidad de Medida: {data['unidad_medida']}")
-    print(f"Fecha: {data['serie'][0]['fecha'][:10]}")
-    print(f"Valor: {data['serie'][0]['valor']}")
-    print("-"*50, "\n")
+
+    # if fecha:
+    #     data: dict = requests.get(f'{api}{indicador}/{fecha}').json()
+    #     return data
+    #     # return {
+    #     #     "codigo": data["codigo"],
+    #     #     "nombre": data["nombre"],
+    #     #     "unidad_medida": data["unidad_medida"],
+    #     #     "fecha": data['serie'][0]['fecha'][:10],
+    #     #     "valor": data['serie'][0]['valor']
+    #     # }
+
+    # else:
+        data: dict = requests.get(api + indicador).json()
+        print(data)
+        print("\n")
+        print("-"*50)
+        print(f"Código: {data['codigo']}")
+        print(f"Nombre: {data['nombre']}")
+        print(f"Unidad de Medida: {data['unidad_medida']}")
+        print(f"Fecha: {data['serie'][0]['fecha'][:10]}")
+        print(f"Valor: {data['serie'][0]['valor']}")
+        print("-"*50, "\n")
