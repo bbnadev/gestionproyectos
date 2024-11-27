@@ -184,3 +184,14 @@ CREATE TABLE `usuario` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+
+CREATE TABLE INDICADORES (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre varchar(25) NOT NULL,
+    valor INT NOT NULL,
+    usuario VARCHAR(255) NOT NULL,
+	sitio VARCHAR(255) DEFAULT "mindicador.cl",
+    fecha_registro DATETIME NOT NULL,
+    fecha_consulta DATETIME DEFAULT CURRENT_TIMESTAMP
+)
