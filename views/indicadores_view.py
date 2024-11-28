@@ -40,7 +40,7 @@ class IndicadoresView:
                     fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
                     data: dict = requests.get(f'{api}/uf/{fecha}').json()
 
-                    if data['message']:
+                    if 'message' in data:
                         print("ERROR:", data['message'])
                         break
 
@@ -62,7 +62,7 @@ class IndicadoresView:
                     fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
                     data: dict = requests.get(f'{api}/ivp/{fecha}').json()
 
-                    if data['message']:
+                    if 'message' in data:
                         print("ERROR:", data['message'])
                         break
 
@@ -85,7 +85,7 @@ class IndicadoresView:
                     fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
                     data: dict = requests.get(f'{api}/ipc/{fecha}').json()
 
-                    if data['message']:
+                    if 'message' in data:
                         print("ERROR:", data['message'])
                         break
 
@@ -108,7 +108,7 @@ class IndicadoresView:
                     fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
                     data: dict = requests.get(f'{api}/utm/{fecha}').json()
 
-                    if data['message']:
+                    if 'message' in data:
                         print("ERROR:", data['message'])
                         break
 
@@ -131,7 +131,7 @@ class IndicadoresView:
                     fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
                     data: dict = requests.get(f'{api}/dolar/{fecha}').json()
 
-                    if data['message']:
+                    if 'message' in data:
                         print("ERROR:", data['message'])
                         break
 
@@ -153,7 +153,7 @@ class IndicadoresView:
                     fecha = fecha if fecha else date.today().strftime("%d-%m-%Y")
                     data: dict = requests.get(f'{api}/euro/{fecha}').json()
 
-                    if data['message']:
+                    if 'message' in data:
                         print("ERROR:", data['message'])
                         break
 
