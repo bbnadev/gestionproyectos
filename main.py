@@ -139,8 +139,6 @@ def main():
                                 indicadoresView.consultar()
                             case "6.2":
                                 indicadoresView.registrar(usuario_actual)
-                            case "6.3":
-                                pass
                             case "q":
                                 break
                     pass
