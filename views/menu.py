@@ -76,3 +76,13 @@ def menu_indicadores_economicos():
     print("6.1 Consultar Indicadores Económicos")
     print("6.2 Registrar Indicadores Económicos")
     print("q. Volver al menu principal")
+
+
+def menu_indicadores():
+    print("1. Unidad de Fomento (UF)")
+    print("2. Índice de valor Promedio (IVP)")
+    print("3. Índice de Precio al Consumidor (IPC)")
+    print("4. Unidad Tributaria Mensual (UTM)")
+    print("5. Dólar Observado")
+    print("6. Euro")
+    print("q. Salir")
