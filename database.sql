@@ -188,10 +188,10 @@ CREATE TABLE `usuario` (
 
 CREATE TABLE INDICADORES (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre varchar(25) NOT NULL,
-    valor INT NOT NULL,
-    usuario VARCHAR(255) NOT NULL,
+  nombre varchar(25) NOT NULL,
+  valor DECIMAL(65, 2) NOT NULL,
+  usuario VARCHAR(255) NOT NULL,
 	sitio VARCHAR(255) DEFAULT "mindicador.cl",
-    fecha_registro DATETIME NOT NULL,
-    fecha_consulta DATETIME DEFAULT CURRENT_TIMESTAMP
-)
+  fecha_registro DATE NOT NULL,
+  fecha_consulta DATETIME DEFAULT CURRENT_TIMESTAMP
+);
